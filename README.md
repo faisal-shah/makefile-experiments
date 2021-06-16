@@ -1,5 +1,5 @@
 # remaking
-This is experimenting with how GNU Make 'remakes' makefiles. Needed to look into this for some code generation stuff where a makefile and some source files were generated using a top level Makefile.
+This is experimenting with how GNU Make 'remakes' makefiles. Needed to look into this for some code generation stuff where a makefile and some source files were generated using a top level Makefile. In this project, module.c and module.mk are generated from an existing module.template file. module.template should be the only of the module.* files checked in to version control. The generated module.mk file is important to include in the top level makefile, as the variable output of it is added to the source list (stuff that needs to be built).
 
 From [GNU Make Remaking](https://www.gnu.org/software/make/manual/make.html#Remaking-Makefiles)
 > Sometimes makefiles can be remade from other files, such as RCS or SCCS files. If a makefile can be remade from other files, you probably want make to get an up-to-date version of the makefile to read in.
