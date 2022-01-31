@@ -1,3 +1,5 @@
+all: defs
+
 SRC_DIRS = path/to/A/src path/to/B/src path/to/C/src
 
 GEN_DIRNAME = gen
@@ -27,3 +29,19 @@ GEN_FILES_C = $(join $(ADDSUFFIX_DIR_PATSUBST_SRC), $(GEN_FILENAMES_C))
 GEN_FILES_H = $(join $(ADDSUFFIX_DIR_PATSUBST_SRC), $(GEN_FILENAMES_H))
 $(info GEN_FILES_C = $(GEN_FILES_C))
 $(info GEN_FILES_H = $(GEN_FILES_H))
+
+define GENERATED_FILE_RULE_TEMPLATE
+$(1) : $(2)
+	@mkdir -p $$(dir $$@)
+	touch $$@
+endef
+
+$(foreach _SRC,$(SRC),\
+	$(eval $(call GENERATED_FILE_RULE_TEMPLATE,$(dir $(patsubst %/,%,$(dir $(_SRC))))$(GEN_DIRNAME)/$(patsubst %.xml,%.c,$(notdir $(_SRC))),$(_SRC))))
+
+defs: $(GEN_FILES_C)
+
+.PHONY: clean
+
+clean:
+	rm -rf $(ADDSUFFIX_DIR_PATSUBST_SRC)
