@@ -15,3 +15,12 @@ To this end, after reading in all makefiles make will consider each as a goal ta
 [remake - a GNU Make debugger!](https://remake.readthedocs.io/en/latest/index.html)
 
 [ChibiOS forum thread](https://forum.chibios.org/viewtopic.php?f=2&t=5866&start=10)
+
+# generated_files_rules
+This is experimenting with GNU Make provided string/path manipulation functions, and programmatically generating makefile rules.
+
+Needed this because I couldn't define a static pattern match rule for generated file targets - which have different paths leading up to the generated file.
+
+The issue is that in a static pattern match, there is only a single wildcard '%' available. This single wildcard is used up trying to capture the filename.
+
+So, the solution is to have a separate rule for each generated file target - but writing those by hand is pain, and impossible if they are provided by the user.  So, I got make to generate the rules for me.
