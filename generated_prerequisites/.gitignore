@@ -1,0 +1,4 @@
+.obj/
+.deps/
+gen_inc/
+build/

@@ -24,3 +24,12 @@ Needed this because I couldn't define a static pattern match rule for generated 
 The issue is that in a static pattern match, there is only a single wildcard '%' available. This single wildcard is used up trying to capture the filename.
 
 So, the solution is to have a separate rule for each generated file target - but writing those by hand is pain, and impossible if they are provided by the user.  So, I got make to generate the rules for me.
+
+# generated_prerequisites
+Playing with how to inform make of the dependencies between C source files and generated headers. The compiler outputs .d files, which list the dependencies of each C file. The header may not exist at the time of compilation. In which case, the compiler will throw an error that the header does not exist.
+
+If you go ahead and `touch` the header file prior to compilation, it will find the empty header file but will likely error out due to it being empty. What's an elegant way to link the C source file to the dependency of the header file, which would then invoke the rule to build the said header file? The current solution is to create the generated headers first (with `make gen`), and then build the project (with `make` or `make all`).
+
+### Other useful links
+[Generating Prerequisites Automatically](https://www.gnu.org/software/make/manual/html_node/Automatic-Prerequisites.html)
+[make.mad-scientist.net :: Auto-Dependency Generation](http://make.mad-scientist.net/papers/advanced-auto-dependency-generation/)
