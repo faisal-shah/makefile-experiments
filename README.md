@@ -32,4 +32,5 @@ If you go ahead and `touch` the header file prior to compilation, it will find t
 
 ### Other useful links
 [Generating Prerequisites Automatically](https://www.gnu.org/software/make/manual/html_node/Automatic-Prerequisites.html)
+
 [make.mad-scientist.net :: Auto-Dependency Generation](http://make.mad-scientist.net/papers/advanced-auto-dependency-generation/)
